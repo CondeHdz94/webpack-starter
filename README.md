@@ -23,5 +23,5 @@ ________________________
 ```
 git add .
 git commit -m "Mensaje de la actualización hecha"
-git push
+git git push
 ```
