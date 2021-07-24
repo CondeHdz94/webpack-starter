@@ -1,7 +1,7 @@
 const HtmlWebPackPlugin         = require('html-webpack-plugin'); 
 const MiniCssExtractPlugin      = require('mini-css-extract-plugin');
 const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin');
-
+const { SourceMapDevToolPlugin }    = require("webpack");
 
 module.exports = {
     mode: 'development',
@@ -57,7 +57,12 @@ module.exports = {
             {
                 test: /\.(png|jpe?g|gif|svg)$/,
                 type: 'asset/resource'
-            }
+            },
+            {
+                test: /\.js$/,
+                enforce: 'pre',
+                use: ['source-map-loader'],
+            },
         ]
     },
     plugins: [
@@ -68,6 +73,9 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: '[name].css',
             ignoreOrder: false
+        }),
+        new SourceMapDevToolPlugin({
+            filename: "[file].map"
         }),
     ]
 
